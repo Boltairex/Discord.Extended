@@ -1,4 +1,7 @@
 # Discord.Extended
+[![NuGet](https://img.shields.io/nuget/vpre/Discord-Extended.svg?maxAge=2592000?style=plastic)](https://www.nuget.org/packages/Discord-Extended)
+[![Discord](https://discord.com/api/guilds/846043238649298944/widget.png)](https://discord.gg/jkrBmQR)
+
 Library, that's extends Discord.net via adding features like paged messages.
 
 # Showcase
