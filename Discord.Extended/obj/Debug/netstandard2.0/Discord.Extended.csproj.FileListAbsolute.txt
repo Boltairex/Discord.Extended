@@ -1,0 +1,27 @@
+C:\Users\huber\source\repos\Discord.Extended\Discord.Extended\bin\Debug\netstandard2.0\Discord.Extended.deps.json
+C:\Users\huber\source\repos\Discord.Extended\Discord.Extended\bin\Debug\netstandard2.0\Discord.Extended.dll
+C:\Users\huber\source\repos\Discord.Extended\Discord.Extended\bin\Debug\netstandard2.0\Discord.Extended.pdb
+C:\Users\huber\source\repos\Discord.Extended\Discord.Extended\obj\Debug\netstandard2.0\Discord.Extended.csprojAssemblyReference.cache
+C:\Users\huber\source\repos\Discord.Extended\Discord.Extended\obj\Debug\netstandard2.0\Discord.Extended.AssemblyInfoInputs.cache
+C:\Users\huber\source\repos\Discord.Extended\Discord.Extended\obj\Debug\netstandard2.0\Discord.Extended.AssemblyInfo.cs
+C:\Users\huber\source\repos\Discord.Extended\Discord.Extended\obj\Debug\netstandard2.0\Discord.Extended.csproj.CoreCompileInputs.cache
+C:\Users\huber\source\repos\Discord.Extended\Discord.Extended\obj\Debug\netstandard2.0\Discord.Extended.dll
+C:\Users\huber\source\repos\Discord.Extended\Discord.Extended\obj\Debug\netstandard2.0\Discord.Extended.pdb
+C:\Users\Boltu\Desktop\Discord.Extended\Discord.Extended\bin\Debug\netstandard2.0\Discord.Extended.deps.json
+C:\Users\Boltu\Desktop\Discord.Extended\Discord.Extended\bin\Debug\netstandard2.0\Discord.Extended.dll
+C:\Users\Boltu\Desktop\Discord.Extended\Discord.Extended\bin\Debug\netstandard2.0\Discord.Extended.pdb
+C:\Users\Boltu\Desktop\Discord.Extended\Discord.Extended\obj\Debug\netstandard2.0\Discord.Extended.csprojAssemblyReference.cache
+C:\Users\Boltu\Desktop\Discord.Extended\Discord.Extended\obj\Debug\netstandard2.0\Discord.Extended.AssemblyInfoInputs.cache
+C:\Users\Boltu\Desktop\Discord.Extended\Discord.Extended\obj\Debug\netstandard2.0\Discord.Extended.AssemblyInfo.cs
+C:\Users\Boltu\Desktop\Discord.Extended\Discord.Extended\obj\Debug\netstandard2.0\Discord.Extended.csproj.CoreCompileInputs.cache
+C:\Users\Boltu\Desktop\Discord.Extended\Discord.Extended\obj\Debug\netstandard2.0\Discord.Extended.dll
+C:\Users\Boltu\Desktop\Discord.Extended\Discord.Extended\obj\Debug\netstandard2.0\Discord.Extended.pdb
+D:\Projekty\aktywne teraz\Discord.Extended\Discord.Extended\bin\Debug\netstandard2.0\Discord.Extended.deps.json
+D:\Projekty\aktywne teraz\Discord.Extended\Discord.Extended\bin\Debug\netstandard2.0\Discord.Extended.dll
+D:\Projekty\aktywne teraz\Discord.Extended\Discord.Extended\bin\Debug\netstandard2.0\Discord.Extended.pdb
+D:\Projekty\aktywne teraz\Discord.Extended\Discord.Extended\obj\Debug\netstandard2.0\Discord.Extended.csprojAssemblyReference.cache
+D:\Projekty\aktywne teraz\Discord.Extended\Discord.Extended\obj\Debug\netstandard2.0\Discord.Extended.AssemblyInfoInputs.cache
+D:\Projekty\aktywne teraz\Discord.Extended\Discord.Extended\obj\Debug\netstandard2.0\Discord.Extended.AssemblyInfo.cs
+D:\Projekty\aktywne teraz\Discord.Extended\Discord.Extended\obj\Debug\netstandard2.0\Discord.Extended.csproj.CoreCompileInputs.cache
+D:\Projekty\aktywne teraz\Discord.Extended\Discord.Extended\obj\Debug\netstandard2.0\Discord.Extended.dll
+D:\Projekty\aktywne teraz\Discord.Extended\Discord.Extended\obj\Debug\netstandard2.0\Discord.Extended.pdb
