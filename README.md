@@ -49,6 +49,6 @@ Showcase gif is the simplest way how you can use it, but really you can build po
 
 Read Wiki tab for explanation of this library!
 
-# About Creators
+# About Creators (Boltarex & Qzername)
 
 We are C# programmers since 2018/2017, and we works with various things, like Rest API for websites, games on Unity, and smaller programs/tools. Also we have some experience with creating bots (since 2019-2020), but it's our first published library. We would appreciate feedback and ideas for longer library development.
