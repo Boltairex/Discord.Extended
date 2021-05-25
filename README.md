@@ -2,6 +2,8 @@
 [![NuGet](https://img.shields.io/nuget/vpre/Discord-Extended.svg?maxAge=2592000?style=plastic)](https://www.nuget.org/packages/Discord-Extended)
 [![Discord](https://discord.com/api/guilds/846043238649298944/widget.png)](https://discord.gg/jkrBmQR)
 
+[![forthebadge](https://forthebadge.com/images/badges/made-with-c-sharp.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+
 Library that extends Discord.net via adding features like paged messages with minor optimization of changing messages content (because of ratelimit), and more features that can extend your bot's functionality.
 
 # Why you should use our library?
