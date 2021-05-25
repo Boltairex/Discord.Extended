@@ -1,10 +1,17 @@
 # Discord.Extended
+
 [![NuGet](https://img.shields.io/nuget/vpre/Discord-Extended.svg?maxAge=2592000?style=plastic)](https://www.nuget.org/packages/Discord-Extended)
 [![Discord](https://discord.com/api/guilds/846043238649298944/widget.png)](https://discord.gg/jkrBmQR)
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c-sharp.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 
 Library that extends Discord.net via adding features like paged messages with minor optimization of changing messages content (because of ratelimit), and more features that can extend your bot's functionality.
+
+# Installation
+You have a few options to install library.
+* Install from releases and manually add DLL file to your Visual Project.
+* Get Source code and compile/modificate it on your own.
+* Check [NuGet](https://www.nuget.org/packages/Discord-Extended) in website or Nuget Package Manager in Visual Studio by phrase 'Discord-Extended'.
 
 # Why you should use our library?
 
