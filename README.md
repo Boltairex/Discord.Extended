@@ -58,7 +58,7 @@ This is the simplest way of implementing a `PagedMessage`. We also prepared some
 
 # Usage
 
-Read the Wiki tab for the explanation!
+Read the Wiki tab for explanation!
 
 # About Creators (Boltarex & Qzername)
 
