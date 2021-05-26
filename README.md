@@ -60,6 +60,6 @@ This is the simplest way of implementing a `PagedMessage`. We also prepared some
 
 Read the Wiki tab for explanation!
 
-# About Creators (Boltarex & Qzername)
+# About Creators (Boltairex & Qzername)
 
 We are C# programmers since 2018/2017, and we worked with various things, like Rest API for websites, games on Unity, and smaller programs/tools. We also have some experience with making bots (since 2019-2020), but it's our first published library. We would appreciate feedback and ideas for further library development.
