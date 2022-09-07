@@ -1,0 +1,10 @@
+C:\Users\Boltu\Desktop\Projekty C#\Discord.Extended.Dev\Discord.Extended\bin\Debug\netstandard2.1\Discord.Extended.deps.json
+C:\Users\Boltu\Desktop\Projekty C#\Discord.Extended.Dev\Discord.Extended\bin\Debug\netstandard2.1\Discord.Extended.dll
+C:\Users\Boltu\Desktop\Projekty C#\Discord.Extended.Dev\Discord.Extended\bin\Debug\netstandard2.1\Discord.Extended.pdb
+C:\Users\Boltu\Desktop\Projekty C#\Discord.Extended.Dev\Discord.Extended\obj\Debug\netstandard2.1\Discord.Extended.csproj.AssemblyReference.cache
+C:\Users\Boltu\Desktop\Projekty C#\Discord.Extended.Dev\Discord.Extended\obj\Debug\netstandard2.1\Discord.Extended.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Boltu\Desktop\Projekty C#\Discord.Extended.Dev\Discord.Extended\obj\Debug\netstandard2.1\Discord.Extended.AssemblyInfoInputs.cache
+C:\Users\Boltu\Desktop\Projekty C#\Discord.Extended.Dev\Discord.Extended\obj\Debug\netstandard2.1\Discord.Extended.AssemblyInfo.cs
+C:\Users\Boltu\Desktop\Projekty C#\Discord.Extended.Dev\Discord.Extended\obj\Debug\netstandard2.1\Discord.Extended.csproj.CoreCompileInputs.cache
+C:\Users\Boltu\Desktop\Projekty C#\Discord.Extended.Dev\Discord.Extended\obj\Debug\netstandard2.1\Discord.Extended.dll
+C:\Users\Boltu\Desktop\Projekty C#\Discord.Extended.Dev\Discord.Extended\obj\Debug\netstandard2.1\Discord.Extended.pdb

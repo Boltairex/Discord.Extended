@@ -6,6 +6,7 @@ using Discord.Extended;
 using System.Threading.Tasks;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using Discord.Extended.Models;
 
 namespace BotForTest
 {
@@ -22,35 +23,57 @@ namespace BotForTest
 
         public async Task StartBot()
         {
+            DiscordSocketConfig socketConfig = new DiscordSocketConfig()
+            {
+                GatewayIntents = GatewayIntents.GuildMembers | GatewayIntents.GuildMessages | GatewayIntents.Guilds | GatewayIntents.AllUnprivileged,
+                AlwaysDownloadUsers = true
+            };
+
+            CommandServiceConfig commandConfig = new CommandServiceConfig()
+            {
+                DefaultRunMode = RunMode.Async,
+                CaseSensitiveCommands = false
+            };
+
             try
             {
                 Console.WriteLine("Rozruch...");
-                using (var Client = new DiscordSocketClient())
+                using (client = new DiscordSocketClient(socketConfig))
                 {
-                    await Client.LoginAsync(TokenType.Bot, "ODI2MTg5Nzg1MzczNzM2OTky.YGI3Mg.zuf9XGUENA9ZqrEUq2eoaVcpHM0");
-                    await Client.StartAsync();
+                    var r1 = client.LoginAsync(TokenType.Bot, "ID").Exception;
+                    var r2 = client.StartAsync().Exception;
 
-                    Console.WriteLine("Zalogowano pomyślnie.");
-
-                    CommandServiceConfig Conf = new CommandServiceConfig()
-                    {
-                        DefaultRunMode = RunMode.Async,
-                        CaseSensitiveCommands = false
-                    };
+                    if (r1 != null)
+                        Console.WriteLine(r1);
+                    if (r2 != null)
+                        Console.Write(r2);
 
                     provider = new ServiceCollection()
-                        .AddSingleton(Client)
+                        .AddSingleton(client)
                         .AddSingleton<ExtendedService>()
                         .BuildServiceProvider();
 
-                    service = new CommandService(Conf);
+                    service = new CommandService(commandConfig);
                     service.AddModulesAsync(Assembly.GetEntryAssembly(), provider).GetAwaiter();
 
+                    Console.WriteLine("Update application commands? T/*");
+                    var key = Console.ReadKey();
+
+                    bool update = key.Key == ConsoleKey.T;
                     Console.WriteLine("Utworzono CommandService pomyślnie.");
 
-                    Client.MessageReceived += HandleCommandAsync;
-                    Client.ReactionAdded += ReactionAdded;
-                    Client.ReactionRemoved += ReactionRemoved;
+                    ApplicationCommandService application = new ApplicationCommandService(client);
+
+                    Console.WriteLine("Utworzono system aplikacji.");
+                    client.MessageReceived += HandleCommandAsync;
+
+                    client.Ready += () => {
+                        application.CollectSlashCommands();
+                        application.CollectUserCommands();
+                        application.CollectMessageCommands();
+                        application.RegisterCommands(update, true);
+                        return Task.CompletedTask;
+                    };
 
                     Console.WriteLine("Bot gotowy do działania.");
 
@@ -72,16 +95,6 @@ namespace BotForTest
                 if (!result.IsSuccess && result.Error != CommandError.UnknownCommand)
                     await context.Channel.SendMessageAsync($"Wystąpił błąd w strukturze skryptu. Szczegóły: {result.ErrorReason}");
             }
-        }
-
-        async Task ReactionAdded(Cacheable<IUserMessage, ulong> cache, ISocketMessageChannel channel, SocketReaction reaction)
-        {
-            throw new NotImplementedException();
-        }
-
-        async Task ReactionRemoved(Cacheable<IUserMessage, ulong> cache, ISocketMessageChannel channel, SocketReaction reaction)
-        {
-            throw new NotImplementedException();
         }
     }
 }

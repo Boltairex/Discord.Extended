@@ -1,20 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <PackageTags>Discord;Wrapper;Tools</PackageTags>
+    <RepositoryUrl>https://github.com/Boltairex/Discord.Extended</RepositoryUrl>
+    <PackageReleaseNotes>Application commands easier usage, new tools</PackageReleaseNotes>
+    <NeutralLanguage>en</NeutralLanguage>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>2.0.0</FileVersion>
+    <PackageLicenseFile>C:\Users\Boltu\Desktop\Projekty C#\Discord.Extended.Dev\LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Copyright>Krzysztof Seruś, Hubert Szymik</Copyright>
+    <PackageProjectUrl>https://github.com/Boltairex/Discord.Extended</PackageProjectUrl>
+    <PackageIcon>DiscordExtendedLogo.png</PackageIcon>
+    <Description>Library that extends Discord.net via adding features like paged messages, application commands handling, some tools.</Description>
+    <Version>$(VersionPrefix)</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Code\Models\EmojisOverLimit.cs" />
+    <Compile Remove="Models\EmojisOverLimit.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Code\Models\NewFile1.txt" />
+    <None Remove="Models\NewFile1.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Discord.Net" Version="2.3.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+    <None Include="..\..\..\..\Documents\DiscordExtendedLogo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Discord.Net" Version="3.7.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
   </ItemGroup>
 
 </Project>

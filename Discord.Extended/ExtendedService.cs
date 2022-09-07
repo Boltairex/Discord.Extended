@@ -6,11 +6,15 @@ using System.Linq;
 using Discord.Rest;
 using System;
 using System.Timers;
+using Discord.Extended.Models;
 
 namespace Discord.Extended
 {
     public class ExtendedService
     {
+        public static ExtendedService Instance { get; private set; }
+        readonly static object threadLock = new object();
+
         /// <summary> Safe from Rate-Limit module.
         /// </summary>
         public static bool smartMessages = true;
@@ -21,70 +25,36 @@ namespace Discord.Extended
         /// </remarks>
         public static uint milisecondsAwait = 450;
 
-        DiscordSocketClient Discord { get; }
+        readonly DiscordSocketClient client;
+
         Dictionary<ulong, SmartMessageInfo> pendingChanges { get; } = new Dictionary<ulong, SmartMessageInfo>();
         Dictionary<IMessage, PagedMessage> pagedMessages { get; } = new Dictionary<IMessage, PagedMessage>();
 
-        System.Timers.Timer LifeTimeOfMessages;
+        System.Timers.Timer lifeTimeOfMessages;
 
-        public ExtendedService(DiscordSocketClient discord)
-        { 
-            Discord = discord;
-            Discord.ReactionAdded += Discord_ReactionAdded;
-            discord.ReactionRemoved += Discord_ReactionRemoved;
-            LifeTimeOfMessages = new System.Timers.Timer();
-            LifeTimeOfMessages.Elapsed += OutdatedMessageCollector;
+        /// <summary>
+        /// Thread-safe singleton initialization.
+        /// </summary>
+        /// <param name="client"></param>
+        public ExtendedService(DiscordSocketClient client)
+        {
+            lock (threadLock)
+            {
+                if (Instance != null) return;
+                this.client = client;
+                this.client.ReactionAdded += DiscordReactionAdded;
+                this.client.ReactionRemoved += DiscordReactionRemoved;
+                lifeTimeOfMessages = new System.Timers.Timer();
+                lifeTimeOfMessages.Elapsed += ExpiredMessagesCollector;
+                Instance = this;
+            }
         }
 
-        void FirstItemAdded()
+        async Task DiscordReactionAdded(Cacheable<IUserMessage, ulong> arg1, Cacheable<IMessageChannel, ulong> arg2, SocketReaction arg3)
         {
             try
             {
-                TimeSpan timerInterval = pagedMessages.First().Value.ExpirationDate - DateTime.Now;
-                LifeTimeOfMessages.Interval = timerInterval.TotalMilliseconds;//Added one to be sure that time will expire
-                LifeTimeOfMessages.Enabled = true;
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        //Collects outdated messages (it's not outdated, it's just collecting outdated messages)
-        void OutdatedMessageCollector(object sender, ElapsedEventArgs args)
-        {
-            var copyPagedMessages = pagedMessages;
-
-            //Remove outdated elements and call OnOutdated event
-            foreach (KeyValuePair<IMessage, PagedMessage> oneMessage in copyPagedMessages)
-                if (oneMessage.Value.ExpirationDate < DateTime.Now)
-                {
-                    pagedMessages.Remove(oneMessage.Key);
-                    if(!(oneMessage.Value.OnMessageOutdated is null))
-                        oneMessage.Value.OnMessageOutdated();
-                }
-
-            //If list doesn't have any elements, turn off timer
-            if(pagedMessages.Count == 0)
-            {
-                LifeTimeOfMessages.Enabled = false;
-                return;
-            }
-
-            //Finding next closest element to wait for
-            var nextElement = pagedMessages.Min(x => x.Value.ExpirationDate);
-            LifeTimeOfMessages.Interval = (pagedMessages.First().Value.ExpirationDate - DateTime.Now).TotalMilliseconds + 1;
-        }
-
-        private Task Discord_ReactionRemoved(Cacheable<IUserMessage, ulong> arg1, ISocketMessageChannel arg2, SocketReaction arg3) => Discord_ReactionAdded(arg1, arg2, arg3);
-
-        private async Task Discord_ReactionAdded(Cacheable<IUserMessage, ulong> arg1,
-            ISocketMessageChannel arg2,
-            SocketReaction arg3)
-        {
-            try
-            {
-                if (arg3.UserId == Discord.CurrentUser.Id) return;
+                if (arg3.UserId == client.CurrentUser.Id) return;
                 if (!pagedMessages.Any(x => x.Key.Id == arg3.MessageId)) return;
 
                 var message = pagedMessages.Single(x => x.Key.Id == arg3.MessageId);
@@ -104,18 +74,62 @@ namespace Discord.Extended
                     else
                     {
                         pendingChanges.Add(message.Key.Id, new SmartMessageInfo(DateTime.Now, message.Key as IUserMessage, 0));
-                        ChangeMessage(message.Key.Id);
+                        await ChangeMessage(message.Key.Id);
                     }
                     return;
                 }
 
                 var SocketMessage = (message.Key as RestUserMessage);
                 await SocketMessage.ModifyAsync(m => m.Embed = message.Value.CurrentPage);
-            } catch (Exception e) { Console.WriteLine(e); }
+            }
+            catch (Exception e) { Console.WriteLine(e); }
+        }
+
+        async Task DiscordReactionRemoved(Cacheable<IUserMessage, ulong> arg1, Cacheable<IMessageChannel, ulong> arg2, SocketReaction arg3) => await DiscordReactionAdded(arg1, arg2, arg3);
+        
+
+        void FirstItemAdded()
+        {
+            try
+            {
+                TimeSpan timerInterval = pagedMessages.First().Value.ExpirationDate - DateTime.Now;
+                lifeTimeOfMessages.Interval = timerInterval.TotalMilliseconds;//Added one to be sure that time will expire
+                lifeTimeOfMessages.Enabled = true;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        //Collects outdated messages (it's not outdated, it's just collecting outdated messages)
+        void ExpiredMessagesCollector(object sender, ElapsedEventArgs args)
+        {
+            var copyPagedMessages = pagedMessages;
+
+            //Remove outdated elements and call OnOutdated event
+            foreach (KeyValuePair<IMessage, PagedMessage> oneMessage in copyPagedMessages)
+                if (oneMessage.Value.ExpirationDate < DateTime.Now)
+                {
+                    pagedMessages.Remove(oneMessage.Key);
+                    if(!(oneMessage.Value.OnMessageOutdated is null))
+                        oneMessage.Value.OnMessageOutdated();
+                }
+
+            //If list doesn't have any elements, turn off timer
+            if(pagedMessages.Count == 0)
+            {
+                lifeTimeOfMessages.Enabled = false;
+                return;
+            }
+
+            //Finding next closest element to wait for
+            var nextElement = pagedMessages.Min(x => x.Value.ExpirationDate);
+            lifeTimeOfMessages.Interval = (pagedMessages.First().Value.ExpirationDate - DateTime.Now).TotalMilliseconds + 1;
         }
 
         /// <summary>
-        /// Task for safe from rate-limit message change.
+        /// Task for rate-limit safe message change.
         /// </summary>
         /// <param name="u"></param>
         /// <returns></returns>
@@ -126,6 +140,7 @@ namespace Discord.Extended
             point:
                 await Task.Delay((int)milisecondsAwait + 50);
                 var info = pendingChanges.Single(x => x.Key == u).Value;
+
                 if (info.Equals(null)) return;
                 if ((DateTime.Now - info.time).TotalMilliseconds >= milisecondsAwait)
                 {
@@ -136,10 +151,10 @@ namespace Discord.Extended
                 }
                 goto point;
             }
-            catch (Exception e){ Console.WriteLine(e); }
+            catch (Exception e) { Console.WriteLine(e); }
         }
 
-        public async Task SendPagedMessage(PagedMessage pagedMessage, SocketCommandContext context)
+        public async Task SendPagedMessage(PagedMessage pagedMessage, ICommandContext context)
         {
             var message = await context.Channel.SendMessageAsync(embed: pagedMessage.CurrentPage);
             pagedMessage.Activate(message);
