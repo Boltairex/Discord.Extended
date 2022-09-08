@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿  <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -6,15 +6,21 @@
     <RepositoryUrl>https://github.com/Boltairex/Discord.Extended</RepositoryUrl>
     <PackageReleaseNotes>Application commands easier usage, new tools</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
-    <AssemblyVersion>2.0.0</AssemblyVersion>
-    <FileVersion>2.0.0</FileVersion>
-    <PackageLicenseFile>C:\Users\Boltu\Desktop\Projekty C#\Discord.Extended.Dev\LICENSE</PackageLicenseFile>
-    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <AssemblyVersion>2.0.2</AssemblyVersion>
+    <FileVersion>2.0.2</FileVersion>
     <Copyright>Krzysztof Seruś, Hubert Szymik</Copyright>
     <PackageProjectUrl>https://github.com/Boltairex/Discord.Extended</PackageProjectUrl>
     <PackageIcon>DiscordExtendedLogo.png</PackageIcon>
     <Description>Library that extends Discord.net via adding features like paged messages, application commands handling, some tools.</Description>
-    <Version>$(VersionPrefix)</Version>
+    <Version>2.0.2</Version>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <SignAssembly>True</SignAssembly>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <PackageId>$(AssemblyName).Core</PackageId>
+    <Product>$(AssemblyName)</Product>
+    <Authors>$(AssemblyName)</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>

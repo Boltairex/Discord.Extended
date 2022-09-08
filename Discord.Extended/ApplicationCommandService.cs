@@ -14,6 +14,9 @@ namespace Discord.Extended
     /// </summary>
     public class ApplicationCommandService : IApplicationCommandHandler
     {
+        /// <summary>
+        /// Instance of created singleton object.
+        /// </summary>
         public static ApplicationCommandService Instance { get; private set; }
 
         readonly static object threadLock = new object();
@@ -50,6 +53,7 @@ namespace Discord.Extended
         /// </summary>
         /// <param name="client"></param>
         /// <param name="autoHandle"></param>
+        /// <param name="authorizer"></param>
         public ApplicationCommandService(DiscordSocketClient client, ICommandAuthorizer authorizer, bool autoHandle = true)
         {
             lock (threadLock)
@@ -67,6 +71,11 @@ namespace Discord.Extended
             }
         }
 
+        /// <summary>
+        /// Console.WriteLine with color
+        /// </summary>
+        /// <param name="m"></param>
+        /// <param name="color"></param>
         public void Printl(string m, ConsoleColor color = ConsoleColor.Cyan)
         {
             Console.ForegroundColor = color;
@@ -79,17 +88,17 @@ namespace Discord.Extended
         /// <summary>
         /// Uses <see cref="CollectCommandsByType{T}"/> by passing <see cref="SlashCommandBase"/> as type.
         /// </summary>
-        public virtual void CollectSlashCommands() => CollectCommandsByType<SlashCommandBase>();
+        public virtual void CollectSlashCommands(Assembly assembly = null) => CollectCommandsByType<SlashCommandBase>(assembly);
 
         /// <summary>
         /// Uses <see cref="CollectCommandsByType{T}"/> by passing <see cref="UserCommandBase"/> as type.
         /// </summary>
-        public virtual void CollectUserCommands() => CollectCommandsByType<UserCommandBase>();
+        public virtual void CollectUserCommands(Assembly assembly = null) => CollectCommandsByType<UserCommandBase>(assembly);
 
         /// <summary>
         /// Uses <see cref="CollectCommandsByType{T}"/> by passing <see cref="MessageCommandBase"/> as type.
         /// </summary>
-        public virtual void CollectMessageCommands() => CollectCommandsByType<MessageCommandBase>();
+        public virtual void CollectMessageCommands(Assembly assembly = null) => CollectCommandsByType<MessageCommandBase>(assembly);
 
         /// <summary>
         /// Collects from assembly all types that inherits from <see cref="ApplicationCommandBase"/> and given type. Results are used later in <see cref="RegisterCommands(bool, bool)"/>.
@@ -103,8 +112,6 @@ namespace Discord.Extended
             assembly = assembly ?? Assembly.GetEntryAssembly();
 
             var t = typeof(T);
-            if (registry.ContainsKey(t))
-                return;
             
             foreach (Type type in assembly.GetTypes()
                     .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(t)))
@@ -237,7 +244,8 @@ namespace Discord.Extended
         /// Trying to get registered command by given name and type category.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="commands"></param>
+        /// <param name="name"></param>
+        /// <param name="command"></param>
         /// <returns></returns>
         public virtual bool TryGetCommand<T>(string name, out ApplicationCommandBase command)
         {
@@ -266,9 +274,11 @@ namespace Discord.Extended
 
             var user = interaction.User;
 
+            name = name.ToLower();
             if (TryGetCommand<T>(name, out var command))
             {
-                if (command.RequireAuthorization && authorizer != null && authorizer.CheckAuthorization(interaction, user))
+                Console.WriteLine(command.Command.Name.Value);
+                if (command.RequireAuthorization && authorizer != null && !authorizer.CheckAuthorization(interaction, user))
                 {
                     await interaction.RespondAsync(text: "No authorization granted.", ephemeral: true);
                     return;
@@ -286,6 +296,7 @@ namespace Discord.Extended
         /// <typeparam name="T"></typeparam>
         /// <param name="name"></param>
         /// <param name="interaction"></param>
+        /// <param name="author"></param>
         /// <returns></returns>
         public virtual async Task ReHandleInteraction<T>(string name, SocketCommandBase interaction, SocketUser author)
         {
