@@ -53,11 +53,11 @@ First, preparing our ApplicationCommandService (can be initialized via ServiceCo
     bool update = key.Key == ConsoleKey.T;
     
     ApplicationCommandService application = new ApplicationCommandService(client);
-    
+    application.CollectSlashCommands();
+    application.CollectUserCommands();
+    application.CollectMessageCommands();
+        
     client.Ready += () => {
-        application.CollectSlashCommands();
-        application.CollectUserCommands();
-        application.CollectMessageCommands();
         application.RegisterCommands(update, true);
         return Task.CompletedTask;
     };
