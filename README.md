@@ -1,6 +1,7 @@
 # Discord.Extended
 
-[![NuGet](https://img.shields.io/nuget/vpre/Discord-Extended.svg?maxAge=2592000?style=plastic)](https://www.nuget.org/packages/Discord.Extended.Core)
+[![Nuget](https://img.shields.io/nuget/v/Discord.Extended.Core)](https://www.nuget.org/packages/Discord.Extended.Core)
+[![Nuget](https://img.shields.io/nuget/dt/Discord.Extended.Core)](https://www.nuget.org/packages/Discord.Extended.Core)
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c-sharp.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 
