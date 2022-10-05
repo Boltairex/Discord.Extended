@@ -40,7 +40,7 @@ namespace BotForTest
                 Console.WriteLine("Rozruch...");
                 using (client = new DiscordSocketClient(socketConfig))
                 {
-                    var r1 = client.LoginAsync(TokenType.Bot, "ODI2MTg5Nzg1MzczNzM2OTky.G_M8cW.nHSlAA83ew7EUgg7R73VbsnszMY37seyr1mGV0").Exception;
+                    var r1 = client.LoginAsync(TokenType.Bot, "token").Exception;
                     var r2 = client.StartAsync().Exception;
 
                     if (r1 != null)

@@ -13,13 +13,13 @@ namespace BotForTest.SlashCommands
         public override async Task ExecuteAsync(SocketSlashCommand interaction, SocketUser author)
         {
             var en = interaction.Data.Options.GetEnumerator();
-            while(en.MoveNext())
+            while (en.MoveNext())
             {
-                switch(en.Current.Name)
+                switch (en.Current.Name)
                 {
-                    case "opcja1":
+                    case "option1":
                         if (en.Current.Value is string text)
-                            await interaction.RespondAsync(text: "napisałeś " + text);
+                            await interaction.RespondAsync(text: "You said: " + text);
                         break;
                 }
             }
@@ -27,12 +27,10 @@ namespace BotForTest.SlashCommands
 
         protected override SlashCommandBuilder GetCommand()
         {
-            SlashCommandBuilder builder = new SlashCommandBuilder()
+            return new SlashCommandBuilder()
                 .WithName("test")
-                .WithDescription("testuje cos")
-                .AddOption("opcja1", ApplicationCommandOptionType.String, "przyjmuje tekst", false);
-
-            return builder;
+                .WithDescription("Testing something")
+                .AddOption("option1", ApplicationCommandOptionType.String, "Accept string", false); ;
         }
     }
 }

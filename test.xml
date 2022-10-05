@@ -1,0 +1,115 @@
+<data>
+	<!-- Modal -->
+	<modal customId="panel1" title="Form">
+		<textArea customId="area1" label="Your signature" maxLength="30" isRequired="true" style="short" placeholder="here"></textArea>
+		<textArea customId="area2" label="Make your signature again." maxLength="30" isRequired="true" style="short" placeholder="here"></textArea>
+	</modal>
+	
+	<!-- Component -->
+	<components customId="panel2">
+		<options customId="selector1">
+			<option value="opt1" description="smoll" isDefault="true"></option>
+			<option value="opt2" description="big"></option>
+			<option value="opt3" description="normal"></option>
+			<option value="opt4" description="yes"></option>
+			<option value="opt5" description="barman"></option>
+			<option value="opt6" description="dwarf"></option>
+			<option value="opt7" description="chunky"></option>
+		</options>
+		<buttons row="1">
+			<button customId="button1" style="secondary" emote=":arrowRight2:1021850797732020225"></button>
+			<button customId="button2" style="secondary"></button>
+			<button customId="button3" style="success"></button>
+		</buttons>
+		<buttons>
+			<button customId="button4" style="link" url="https://media.discordapp.net/attachments/123936675209412608/1019692480435847178/Ticket-what-is-that.jpg"></button>
+		</buttons>
+	</components>
+	
+	<!-- Embed -->
+	<embed title="Embed's title" color="#22FF11" timestamp="10:32-N">
+		<url>https://media.discordapp.net/attachments/123936675209412608/1019692480435847178/Ticket-what-is-that.jpg</url>
+		<!--
+		<thumbnailUrl>https://media.discordapp.net/attachments/123936675209412608/1019692480435847178/Ticket-what-is-that.jpg</thumbnailUrl>
+		<imageUrl>https://media.discordapp.net/attachments/123936675209412608/1019692480435847178/Ticket-what-is-that.jpg</imageUrl>
+		-->
+		<fieldgroup>
+			<field label="One"> Content One </field>
+			<field label="Two"> [nothin'](https://www.youtube.com/watch?v=dQw4w9WgXcQ) </field>
+			<field label="Three">Content Three</field>
+		</fieldgroup>
+		<field label="Four">Should be under</field>
+		<field label="Five">Yeah</field>
+		<footer>
+			<url>https://media.discordapp.net/attachments/1018240922896576612/1018241489467355226/CAH.png</url>
+			<value>My Footer</value>
+		</footer>
+	</embed>
+</data>
+<!--
+
+  embed:
+!title : string
+description : string
+color : string (hex) #FF0012
+timestamp : string (now, YY:MM:DD:HH:MM:SS (normal date, read from right to the left), or DD:HH:MM:SS-N (that means, calculated from current date))
+nodes:
+  field
+  url: string
+  imageUrl: string 
+  thumbnailUrl: string
+  footer:
+  nodes:
+    url:
+	value:
+
+  field:
+!label : string
+value : string (as node text)
+inline : bool
+ 
+  modal:
+!customId : string
+title : string < customId
+
+  textArea:
+!customId : string
+label : string < customId
+maxLength : int
+minLength : int
+style : enum (short, paragraph)
+value : string
+placeholder : string < "..."
+isRequired : bool
+
+  components:
+!customId : string
+
+  collection:
+!customId : string
+
+  buttons:
+row : int
+
+  button:
+!customId : string 
+url : string
+label : string < customId (if url is set, just use customId)
+style : enum (primary, secondary, success, danger, link)
+emote : string (id)
+disabled : bool
+
+  options:
+!customId : string
+row : int
+minValues : int
+maxValues : int
+disabled : bool
+placeholder : string
+
+  option:
+!value : string
+label : string < value
+description : string
+isDefault : bool
+-->
