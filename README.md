@@ -1,13 +1,21 @@
 # Discord.Extended
-
-[![NuGet](https://img.shields.io/nuget/vpre/Discord-Extended.svg?maxAge=2592000?style=plastic)](https://www.nuget.org/packages/Discord.Extended.Core)
+[![Nuget](https://img.shields.io/nuget/v/Discord.Extended.Core)](https://www.nuget.org/packages/Discord.Extended.Core)
+[![Nuget](https://img.shields.io/nuget/dt/Discord.Extended.Core)](https://www.nuget.org/packages/Discord.Extended.Core)
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c-sharp.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 
 Library that extends [Discord.net](https://github.com/discord-net/Discord.Net) via adding features like ApplicationCommands handler, paged messages with minor optimization of changing messages content (because of ratelimit), and more features that can extend your bot's functionality.
 
-# Warning
 Due to NuGet push errors, we created new package (older is named Discord.Extended, new Discord.Extended.Core).
+
+# Currently working on (version 2.1.0)
+* Xml structure to [Modal](https://discordnet.dev/guides/int_basics/modals/intro.html) or [MessageComponent](https://discordnet.dev/guides/int_basics/message-components/intro.html).
+* Extending ApplicationCommands system (like better subcommands creation, not direct commands). Includes receiving events by specified customId (already available in Discord.Net, but i have to integrate it).
+* More tools and improvements (like direct randomizing Discord.Color, not System.Drawing.Color).
+
+**Previews:**
+* [XML structure](https://media.discordapp.net/attachments/1018240922896576612/1019673167301709824/unknown.png)
+* [Modal result](https://cdn.discordapp.com/attachments/1018240922896576612/1019690024444370996/unknown.png)
 
 # Discord.Net.Core (>= 2.0.0) min. Requirements
 * C#, netstandard 2.1
@@ -53,11 +61,11 @@ First, preparing our ApplicationCommandService (can be initialized via ServiceCo
     bool update = key.Key == ConsoleKey.T;
     
     ApplicationCommandService application = new ApplicationCommandService(client);
-    
+    application.CollectSlashCommands();
+    application.CollectUserCommands();
+    application.CollectMessageCommands();
+        
     client.Ready += () => {
-        application.CollectSlashCommands();
-        application.CollectUserCommands();
-        application.CollectMessageCommands();
         application.RegisterCommands(update, true);
         return Task.CompletedTask;
     };
