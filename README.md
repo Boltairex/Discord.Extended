@@ -8,10 +8,13 @@ Library that extends [Discord.net](https://github.com/discord-net/Discord.Net) v
 
 Due to NuGet push errors, we created new package (older is named Discord.Extended, new Discord.Extended.Core).
 
-# Currently working on (version 2.1.0)
-* Xml structure to [Modal](https://discordnet.dev/guides/int_basics/modals/intro.html) or [MessageComponent](https://discordnet.dev/guides/int_basics/message-components/intro.html).
-* Extending ApplicationCommands system (like better subcommands creation, not direct commands). Includes receiving events by specified customId (already available in Discord.Net, but i have to integrate it).
-* More tools and improvements (like direct randomizing Discord.Color, not System.Drawing.Color).
+# Currently working on (version 2.2.0)
+* Extending ApplicationCommands system (like better subcommands creation, not direct commands). Includes receiving events by specified customId.
+* Better SubCommands in SlashCommands, smart auto filling methods in components.
+
+# Version 2.1.0
+* Xml structure parsing to: [Modal](https://discordnet.dev/guides/int_basics/modals/intro.html) or [MessageComponent](https://discordnet.dev/guides/int_basics/message-components/intro.html).
+* Tools improvement
 
 **Previews:**
 * [XML structure](https://media.discordapp.net/attachments/1018240922896576612/1019673167301709824/unknown.png)
