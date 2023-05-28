@@ -1,4 +1,4 @@
-# Discord.Extended
+# Discord.Extended [Unsupported]
 [![Nuget](https://img.shields.io/nuget/v/Discord.Extended.Core)](https://www.nuget.org/packages/Discord.Extended.Core)
 [![Nuget](https://img.shields.io/nuget/dt/Discord.Extended.Core)](https://www.nuget.org/packages/Discord.Extended.Core)
 
